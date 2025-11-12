@@ -11,7 +11,7 @@ import {
   
   @WebSocketGateway({
     cors: {
-      origin: '*', // Ajuste conforme necessário para seu ambiente
+      origin: '*',
     },
   })
   export class ChatGateway
@@ -23,7 +23,6 @@ import {
     @SubscribeMessage('messageToServer')
     handleMessage(client: Socket, payload: { to: string; message: string }): void {
       this.logger.log(`Message from ${client.id}: ${payload.message}`);
-      // Enviar mensagem ao destinatário
       this.server.emit('messageToClient', payload);
     }
   
